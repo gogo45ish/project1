@@ -5,6 +5,7 @@ import Project from '../Project/Project';
 import './ProjectList.css';
 import ProjectSorter from '../ProjectSorter/ProjectSorter';
 import ProjectFilter from '../ProjectFiler/ProjectFilter';
+import { Link } from 'react-router-dom';
 
 const ProjectList = () => {
   const { projects, addProject, deleteProject, updateProject } = useProjects();
@@ -84,16 +85,19 @@ const ProjectList = () => {
   return (
     <div>
       <LogoutButton />
-      <h2>Your Projects</h2>
+      <Link to={`/profile`}>
+        <p>Профиль</p> {/* Показать количество выполненных задач */}
+      </Link>
+      <h2>Ваши проекты</h2>
       
       {/* Project Addition */}
       <input
         type="text"
-        placeholder="New Project"
+        placeholder="Новый проект"
         value={newProject}
         onChange={(e) => setNewProject(e.target.value)}
       />
-      <button onClick={handleAddProject}>Add Project</button>
+      <button onClick={handleAddProject}>Добавить проект</button>
 
       {/* Sorting */}
       <ProjectSorter
@@ -132,3 +136,4 @@ const ProjectList = () => {
 };
 
 export default ProjectList;
+

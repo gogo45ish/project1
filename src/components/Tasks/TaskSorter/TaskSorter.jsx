@@ -1,20 +1,20 @@
-// TaskSorter.js
+// src/components/TaskSorter.js
 import React from 'react';
 import './TaskSorter.css'; // Assuming your CSS file is named TaskSorter.css
 
 const TaskSorter = ({ sortOrder, setSortOrder, sortDirection, toggleSortDirection }) => (
   <div className="task-sorter">
-    <h3>Sort Tasks</h3>
+    <h3>Сортировка задач</h3>
 
     {/* Sort by dropdown */}
-    <label>Sort by: </label>
+    <label>Сортировать по: </label>
     <select
       className="task-sorter-select"
       value={sortOrder}
       onChange={(e) => setSortOrder(e.target.value)}
     >
-      <option value="name">Name</option>
-      <option value="createdAt">Date Created</option>
+      <option value="name">Имя</option>
+      <option value="createdAt">Дата создания</option>
     </select>
 
     {/* Toggle Sort Direction button */}
@@ -22,7 +22,7 @@ const TaskSorter = ({ sortOrder, setSortOrder, sortDirection, toggleSortDirectio
       className="task-sorter-button"
       onClick={toggleSortDirection}
     >
-      {sortDirection === 'asc' ? 'ASC' : 'DESC'}
+      {sortDirection === 'asc' ? 'По возрастанию' : 'По убыванию'}
     </button>
   </div>
 );

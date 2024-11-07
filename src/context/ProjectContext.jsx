@@ -2,12 +2,20 @@ import React, { createContext, useContext, useEffect, useState } from 'react';
 import { useUser } from './UserContext';
 import { v4 as uuidv4 } from 'uuid';
 const ProjectsContext = createContext();
+var API_BASE_URL = ""
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3001';
+if (import.meta.env.MODE === 'development') {
+  API_BASE_URL = 'http://localhost:3001';
+} else {
+  API_BASE_URL = import.meta.env.VITE_API_BASE_URL
+}
+console.log('API Base URL:', API_BASE_URL); // This will show different values based on your environment
+
 
 export const ProjectsProvider = ({ children }) => {
   const [projects, setProjects] = useState([]);
   const [tasks, setTasks] = useState([]); // State to hold tasks
+  const [completedTasks, setCompletedTasks] = useState(0)
   const { user } = useUser();
 
   useEffect(() => {
@@ -19,24 +27,18 @@ export const ProjectsProvider = ({ children }) => {
           return;
         }
         const data = await response.json();
+        
         setProjects(data);
-      }
-    };
 
-    const fetchTasks = async () => {
-      if (user) {
-        const response = await fetch(`${API_BASE_URL}/tasks?userId=${user.id}`); // Assuming tasks are user-specific
-        if (!response.ok) {
-          console.error('Failed to fetch tasks:', response.statusText);
-          return;
-        }
-        const data = await response.json();
-        setTasks(data);
+        let sum = data.reduce(function(prev, current) {
+          return prev + +current.completedTasks
+        }, 0);
+
+        setCompletedTasks(sum)
       }
     };
 
     fetchProjects();
-    fetchTasks();
   }, [user]);
 
 
@@ -137,6 +139,7 @@ export const ProjectsProvider = ({ children }) => {
   return (
     <ProjectsContext.Provider value={{ 
       projects, 
+      completedTasks,
       addProject, 
       deleteProject, 
       updateProject}}>

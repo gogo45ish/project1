@@ -14,30 +14,30 @@ const TaskFilter = ({
 }) => (
   <div className="task-filter">
     {/* Status Filter */}
-    <h3>Filter Tasks</h3>
-    <label>Filter by Status: </label>
+    <h3>Фильтры задач</h3>
+    <label>Фильтр по статусу: </label>
     <select
       className="task-filter-select"
       value={statusFilter}
       onChange={(e) => setStatusFilter(e.target.value)}
     >
-      <option value="all">All</option>
-      <option value="completed">Completed Only</option>
-      <option value="incomplete">Incomplete Only</option>
+      <option value="all">Все</option>
+      <option value="completed">Выполненные</option>
+      <option value="incomplete">Невыполненные</option>
     </select>
 
     {/* Search by Task Name */}
-    <label>Search Task: </label>
+    <label>Поиск по названию: </label>
     <input
       className="task-filter-input"
       type="text"
-      placeholder="Search by Name"
+      placeholder="Поиск по названию:"
       value={searchTerm}
       onChange={(e) => setSearchTerm(e.target.value)}
     />
 
     {/* Date Range Filter */}
-    <label>Created Between: </label>
+    <label>Диапазон дат: </label>
     <input
       className="task-filter-date"
       type="date"
@@ -54,3 +54,6 @@ const TaskFilter = ({
 );
 
 export default TaskFilter;
+
+
+

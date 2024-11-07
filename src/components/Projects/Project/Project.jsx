@@ -24,25 +24,25 @@ const Project = ({ project, completedTaskCount, onEdit, onDelete, onSave }) => {
             value={editedName}
             onChange={(e) => setEditedName(e.target.value)}
           />
-          <button onClick={handleSave}>Save</button>
-          <button onClick={() => setIsEditing(false)}>Cancel</button>
+          <button onClick={handleSave}>Сохранить</button>
+          <button onClick={() => setIsEditing(false)}>Отменить</button>
         </>
       ) : (
         <>
           <Link to={`/projects/${project.id}/tasks`}>
-            <p className='project-name'>{project.name} </p> {/* Display task count */}
+            <p className='project-name'>{project.name} </p> {/* Показать количество выполненных задач */}
           </Link>
-          (Completed Tasks: {completedTaskCount})
+          (Выполненные задачи: {completedTaskCount})
           <div className='project-actions'>
-            <button className='edit-button' onClick={handleEdit}>Edit</button>
+            <button className='edit-button' onClick={handleEdit}>Редактировать</button>
             <button
               className='delete-button'
               onClick={(e) => {
-                e.stopPropagation(); // Prevent link click when deleting
+                e.stopPropagation(); // Предотвратить клик по ссылке при удалении
                 onDelete(project.id);
               }}
             >
-              Delete
+              Удалить
             </button>
           </div>
           
@@ -53,3 +53,4 @@ const Project = ({ project, completedTaskCount, onEdit, onDelete, onSave }) => {
 };
 
 export default Project;
+

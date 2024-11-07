@@ -1,6 +1,15 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, { createContext, useContext, useState } from 'react';
 import { useProjects } from './ProjectContext';
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3001';
+import { v4 as uuidv4 } from 'uuid';
+var API_BASE_URL = ""
+
+if (import.meta.env.MODE === 'development') {
+  API_BASE_URL = 'http://localhost:3001';
+} else {
+  API_BASE_URL = import.meta.env.VITE_API_BASE_URL
+}
+console.log('API Base URL:', API_BASE_URL); // This will show different values based on your environment
+
 
 const TasksContext = createContext();
 
@@ -9,14 +18,11 @@ export const TasksProvider = ({ children }) => {
   const { projects  } = useProjects();
 
   // Fetch all tasks
-  const fetchTasks = async () => {
+  const fetchTasks = async (projectId) => {
     try {
       console.log(API_BASE_URL);
-      
-      const response = await fetch(`${API_BASE_URL}/tasks`);
+      const response = await fetch(`${API_BASE_URL}/tasks?projectId=${projectId}`);
       console.log(response.url);
-      
-      
       const data = await response.json();
       setTasks(data);
     } catch (error) {
@@ -31,7 +37,7 @@ export const TasksProvider = ({ children }) => {
       createdAt: new Date().toISOString(),
       projectId: task.projectId,
       completed: task.completed,
-      id: parseInt(task.id) // Convert id to integer
+      id: uuidv4() // Convert id to integer
     };
     try {
       const response = await fetch(`${API_BASE_URL}/tasks`, {

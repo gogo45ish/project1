@@ -1,7 +1,13 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
 const UserContext = createContext();
+var API_BASE_URL = ""
 
+if (import.meta.env.MODE === 'development') {
+  API_BASE_URL = 'http://localhost:3001';
+} else {
+  API_BASE_URL = import.meta.env.VITE_API_BASE_URL
+}
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(() => {
     const savedUser = localStorage.getItem('currentUser');
@@ -9,6 +15,9 @@ export const UserProvider = ({ children }) => {
   });
 
   const [isAuthenticated, setIsAuthenticated] = useState(!!user);
+
+  
+
 
   useEffect(() => {
     // Sync isAuthenticated with the presence of a user

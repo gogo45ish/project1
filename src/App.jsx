@@ -8,6 +8,7 @@ import { ProjectsProvider } from './context/ProjectContext';
 import { UserProvider } from './context/UserContext';
 import { TasksProvider } from './context/TasksContext';
 import ProtectedRoute from './components/Auth/ProtectedRoute';
+import UserProfile from './components/UserProfile';
 
 
 const App = () => {
@@ -17,6 +18,7 @@ const App = () => {
         <TasksProvider>
           <Router>
             <Routes>
+              <Route path="/profile" element={<UserProfile />} />
               <Route path="/projects" element={<ProtectedRoute element={<ProjectList />} />} />
               <Route path="/projects/:id/tasks" element={<ProtectedRoute element={<TaskList />} />} />
               <Route path="/login" element={<Login />} />

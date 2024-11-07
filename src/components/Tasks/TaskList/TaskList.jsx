@@ -1,6 +1,6 @@
-// TaskList.js
-import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
+// src/components/TaskList.js
+import React, { useEffect, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
 import LogoutButton from '../../Auth/LogoutButton';
 import { useTasks } from '../../../context/TasksContext';
 import { useProjects } from '../../../context/ProjectContext';
@@ -20,11 +20,15 @@ const TaskList = () => {
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
 
-  const { tasks, addTask, deleteTask, updateTask } = useTasks();
+  const { tasks, fetchTasks, addTask, deleteTask, updateTask } = useTasks();
   const { projects } = useProjects();
 
   const projectTasks = tasks.filter((task) => task.projectId === id);
 
+  useEffect(() => {
+    fetchTasks(id);
+  }, []);
+  
   const handleAddTask = () => {
     if (!newTask) return;
     addTask({ name: newTask, projectId: id, completed: false, createdAt: new Date().toISOString() });
@@ -81,22 +85,28 @@ const TaskList = () => {
   return (
     <div>
       <LogoutButton />
+      <Link to={`/profile`}>
+        <p>Профиль</p> {/* Показать количество выполненных задач */}
+      </Link>
+      <Link to={`/projects`}>
+        <p>Проекты</p> {/* Показать количество выполненных задач */}
+      </Link>
       {currentProject ? (
-        <h2>Tasks for Project: {currentProject.name} (ID: {id})</h2>
+        <h2>Задачи для проекта: {currentProject.name} (ID: {id})</h2>
       ) : (
-        <h2>Project not found</h2>
+        <h2>Проект не найден</h2>
       )}
       
       <div className="task-list">
         <input
           type="text"
-          placeholder="New Task"
+          placeholder="Новая задача"
           value={newTask}
           onChange={(e) => setNewTask(e.target.value)}
         />
-        <button onClick={handleAddTask}>Add Task</button>
+        <button onClick={handleAddTask}>Добавить задачу</button>
         
-        {/* Sorting and Filtering Controls */}
+        {/* Элементы управления сортировкой и фильтрацией */}
         <TaskSorter
           sortOrder={sortOrder}
           setSortOrder={setSortOrder}
@@ -115,7 +125,7 @@ const TaskList = () => {
           setEndDate={setEndDate}
         />
 
-        {/* Task List */}
+        {/* Список задач */}
         <ul className="task-list">
           {filteredTasks.map((task) => (
             <li className="task-item" key={task.id}>
@@ -126,34 +136,34 @@ const TaskList = () => {
                     value={editedTaskName}
                     onChange={(e) => setEditedTaskName(e.target.value)}
                   />
-                  <button onClick={() => handleSaveTaskEdit(task.id)} className="edit-button">Save</button>
-                  <button onClick={() => setEditingTaskId(null)} className="edit-button">Cancel</button>
+                  <button onClick={() => handleSaveTaskEdit(task.id)} className="edit-button">Сохранить</button>
+                  <button onClick={() => setEditingTaskId(null)} className="edit-button">Отменить</button>
                 </>
               ) : (
                 <>
                   <span
                     className={task.completed ? "completed-task" : ""}
                   >
-                    {task.name} (Created on: {new Date(task.createdAt).toLocaleDateString()})
+                    {task.name} (Создана: {new Date(task.createdAt).toLocaleDateString()})
                   </span>
                   <div className="task-actions">
                     <button 
                       onClick={() => handleMarkTaskComplete(task.id, task.completed)}
                       className={task.completed ? "delete-button" : "edit-button"}
                     >
-                      {task.completed ? 'Mark Incomplete' : 'Mark Complete'}
+                      {task.completed ? 'Отметить как незавершенную' : 'Отметить как завершенную'}
                     </button>
                     <button 
                       onClick={() => handleEditTask(task.id, task.name)}
                       className="edit-button"
                     >
-                      Edit
+                      Редактировать
                     </button>
                     <button 
                       onClick={() => handleDeleteTask(task.id)}
                       className="delete-button"
                     >
-                      Delete
+                      Удалить
                     </button>
                   </div>
                 </>

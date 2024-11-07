@@ -6,7 +6,6 @@ import { useUser } from '../../context/UserContext';
 
 const ProtectedRoute = ({ element }) => {
   const { isAuthenticated } = useUser();
-  console.log(isAuthenticated);
   
   return isAuthenticated ? element : <Navigate to="/login" />;
 };

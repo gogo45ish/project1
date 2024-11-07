@@ -1,17 +1,16 @@
 // src/components/Auth/Login.jsx
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { useUser } from '../../context/UserContext'; // Import the useUser hook
-import './Auth.css'; // Import the Auth.css file
+import { useUser } from '../../context/UserContext'; // Импорт хука useUser
+import './Auth.css'; // Импорт файла Auth.css
 var API_BASE_URL = ""
-
 
 if (import.meta.env.MODE === 'development') {
   API_BASE_URL = 'http://localhost:3001';
 } else {
   API_BASE_URL = import.meta.env.VITE_API_BASE_URL
 }
-console.log('API Base URL:', API_BASE_URL); // This will show different values based on your environment
+console.log('API Base URL:', API_BASE_URL); // Выводит разные значения в зависимости от среды
 
 console.log(import.meta.env);
 
@@ -21,7 +20,7 @@ const Login = () => {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
 
-  const { login } = useUser(); // Access the login function from context
+  const { login } = useUser(); // Доступ к функции входа из контекста
   const navigate = useNavigate();
 
   const onLogin = async (e) => {
@@ -39,14 +38,14 @@ const Login = () => {
       );
   
       if (foundUser) {
-        login(foundUser); // Sets the user and isAuthenticated
-        setSuccess('Login successful!');
-        navigate('/projects'); // Redirect after login
+        login(foundUser); // Устанавливает пользователя и isAuthenticated
+        setSuccess('Вход выполнен успешно!');
+        navigate('/projects'); // Перенаправление после входа
       } else {
-        setError('Invalid username or password');
+        setError('Неверное имя пользователя или пароль');
       }
     } catch (err) {
-      setError('Failed to fetch users. Please try again later.');
+      setError('Не удалось получить данные пользователей. Пожалуйста, попробуйте позже.');
     }
   };
   
@@ -54,10 +53,10 @@ const Login = () => {
   return (
     <div className="auth-container">
       <div className="auth-form">
-        <h2>Login</h2>
+        <h2>Вход</h2>
         <form onSubmit={onLogin}>
           <div>
-            <label>Username:</label>
+            <label>Имя пользователя:</label>
             <input
               type="text"
               value={username}
@@ -65,7 +64,7 @@ const Login = () => {
             />
           </div>
           <div>
-            <label>Password:</label>
+            <label>Пароль:</label>
             <input
               type="password"
               value={password}
@@ -74,10 +73,10 @@ const Login = () => {
           </div>
           {error && <p className="auth-message auth-message--error">{error}</p>}
           {success && <p className="auth-message auth-message--success">{success}</p>}
-          <button type="submit">Login</button>
+          <button type="submit">Войти</button>
         </form>
         <p style={{ marginTop: '10px' }}>
-          Don't have an account? <Link to="/register">Register</Link>
+          Нет учетной записи? <Link to="/register">Зарегистрироваться</Link>
         </p>
       </div>
     </div>

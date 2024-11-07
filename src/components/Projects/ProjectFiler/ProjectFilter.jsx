@@ -13,20 +13,20 @@ const ProjectFilter = ({
 }) => {
   return (
     <div className="project-filter">
-      <h3>Filters</h3>
+      <h3>Фильтры</h3>
   
       {/* Filter by Task Completion Count */}
       <label>
-        Completed Tasks Range:
+        диапазон выполненных задач:
         <input
           type="number"
-          placeholder="Min"
+          placeholder="Минимум"
           value={taskMinCount}
           onChange={(e) => setTaskMinCount(Number(e.target.value))}
         />
         <input
           type="number"
-          placeholder="Max"
+          placeholder="Максимум"
           value={taskMaxCount === Infinity ? '' : taskMaxCount}
           onChange={(e) => setTaskMaxCount(e.target.value ? Number(e.target.value) : Infinity)}
         />
@@ -34,10 +34,10 @@ const ProjectFilter = ({
   
       {/* Filter by Project Name */}
       <label>
-        Project Name:
+        Название проекта:
         <input
           type="text"
-          placeholder="Search by name"
+          placeholder="Поиск по названию"
           value={searchName}
           onChange={(e) => setSearchName(e.target.value)}
         />
@@ -45,7 +45,7 @@ const ProjectFilter = ({
   
       {/* Filter by Creation Date Range */}
       <label>
-        Date Range:
+        Диапазон дат:
         <input
           type="date"
           value={dateRange.start}
@@ -62,3 +62,4 @@ const ProjectFilter = ({
 };
 
 export default ProjectFilter;
+
