@@ -3,8 +3,17 @@ import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useUser } from '../../context/UserContext'; // Import the useUser hook
 import './Auth.css'; // Import the Auth.css file
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3001';
+var API_BASE_URL = ""
+
+
+if (import.meta.env.MODE === 'development') {
+  API_BASE_URL = 'http://localhost:3001';
+} else {
+  API_BASE_URL = import.meta.env.VITE_API_BASE_URL
+}
 console.log('API Base URL:', API_BASE_URL); // This will show different values based on your environment
+
+console.log(import.meta.env);
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -18,7 +27,11 @@ const Login = () => {
   const onLogin = async (e) => {
     e.preventDefault();
     try {
+      console.log(API_BASE_URL);
+      
       const response = await fetch(`${API_BASE_URL}/users`);
+      console.log(response.url);
+      
       const users = await response.json();
   
       const foundUser = users.find(
