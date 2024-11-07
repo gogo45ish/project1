@@ -1,0 +1,60 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "username": "user1",
+      "password": "password1",
+      "isAuthenticated": false
+    },
+    {
+      "id": "2",
+      "username": "user2",
+      "password": "password2",
+      "isAuthenticated": false
+    },
+    {
+      "username": "123",
+      "password": "123",
+      "isAuthenticated": false,
+      "id": "3"
+    },
+    {
+      "id": "65d0",
+      "username": "111",
+      "password": "111",
+      "isAuthenticated": false
+    }
+  ],
+  "projects": [
+    {
+      "name": "FIRST",
+      "createdAt": "2024-11-06T11:09:16.386Z",
+      "userId": 1,
+      "completedTasks": 0,
+      "id": "3"
+    },
+    {
+      "name": "SECOND",
+      "createdAt": "2024-11-06T11:09:21.549Z",
+      "userId": 1,
+      "completedTasks": 0,
+      "id": "4"
+    },
+    {
+      "name": "FIRST PROJECT",
+      "createdAt": "2024-11-06T14:29:41.730Z",
+      "userId": 3,
+      "completedTasks": 1,
+      "id": "5"
+    }
+  ],
+  "tasks": [
+    {
+      "name": "aaa",
+      "createdAt": "2024-11-06T14:29:47.900Z",
+      "projectId": "5",
+      "completed": true,
+      "id": "1"
+    }
+  ]
+}

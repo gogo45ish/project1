@@ -1,0 +1,85 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+/* General Button Styles */
+.button {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* Add Project Button Styles */
+.new-project-button {
+  background-color: #4CAF50; /* Green background */
+  color: white;
+  margin-left: 8px;
+}
+
+.new-project-button:hover {
+  background-color: #45a049; /* Darker green on hover */
+}
+
+/* Edit Button Styles */
+.edit-button {
+  background-color: #2196F3; /* Blue background */
+  color: white;
+  margin-right: 4px;
+}
+
+.edit-button:hover {
+  background-color: #1976D2; /* Darker blue on hover */
+}
+
+/* Delete Button Styles */
+.delete-button {
+  background-color: #f44336; /* Red background */
+  color: white;
+  margin-left: 4px;
+}
+
+.delete-button:hover {
+  background-color: #d32f2f; /* Darker red on hover */
+}
