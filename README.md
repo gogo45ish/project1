@@ -19,36 +19,23 @@ Yarn: This app uses Yarn as the package manager. Install it globally if not alre
 
 1\. Clone the repository to your local machine:
 
-git clone
+``` git clone https://github.com/gogo45ish/project1.git ```
+#
 
-cd
+``` cd project!```
 
 2\. Install dependencies:
 
-yarn install
+```yarn install```
 
 Running the App
 
 Start the development server:
 
-yarn dev
-
-The app will be available at http://localhost:3000 (or as specified in the terminal output).
+```yarn dev```
 
 Build for Production
 
 To create an optimized production build:
 
-yarn build
-
-Folder Structure
-
-src: Contains the main codebase for the React app.
-
-public: Static files like images or icons.
-
-vite.config.js: Configuration file for Vite.
-
-Additional Information
-
-For more information on using Vite with React, refer to the Vite documentation.
+```yarn build ```
