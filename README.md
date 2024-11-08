@@ -1,41 +1,42 @@
 
 # React Vite App
 
-This is a React app powered by Vite for fast and efficient development.
+Это приложение React на базе Vite для быстрой и эффективной разработки.
 
-## Getting Started
+## Начало работы
 
-Follow the steps below to set up and run the app on your local machine.
+Выполните следующие шаги, чтобы настроить и запустить приложение на вашей локальной машине.
 
-## Prerequisites
+## Необходимые условия
 
-Node.js: Make sure Node.js is installed. You can download it from Node.js official website.
+Node.js: Убедитесь, что Node.js установлен. Вы можете загрузить его с официального сайта Node.js.
 
-Yarn: This app uses Yarn as the package manager. Install it globally if not already installed:
+Yarn: Это приложение использует Yarn в качестве менеджера пакетов. Установите его глобально, если он еще не установлен:
 
-```npm install -g yarn```
+``npm install -g yarn``.
 
-## Installation
+## Установка
 
-1\. Clone the repository to your local machine:
+1\. Клонируйте репозиторий на вашу локальную машину:
 
 ``` git clone https://github.com/gogo45ish/project1.git ```
 #
 
-``` cd project!```
+``` cd project1``
 
-2\. Install dependencies:
+2\. Установите зависимости:
 
-```yarn install```
+``yarn install``.
 
-Running the App
+Запуск приложения
 
-Start the development server:
+Запустите сервер разработки:
 
-```yarn dev```
+``yarn dev``.
 
-Build for Production
+Сборка для производства
 
-To create an optimized production build:
+Чтобы создать оптимизированную сборку для производства:
 
-```yarn build ```
+``yarn build ``
+
