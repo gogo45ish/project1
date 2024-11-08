@@ -141,6 +141,7 @@ export const ProjectsProvider = ({ children }) => {
     <ProjectsContext.Provider value={{ 
       projects, 
       completedTasks,
+      setProjects,
       addProject, 
       deleteProject, 
       updateProject}}>

@@ -15,7 +15,7 @@ const TasksContext = createContext();
 
 export const TasksProvider = ({ children }) => {
   const [tasks, setTasks] = useState([]);
-  const { projects  } = useProjects();
+  const { projects,setProjects  } = useProjects();
 
   // Generates a random id
   const generateId = () => (Math.floor(Math.random() * 100000000) + 1).toString();
@@ -143,6 +143,13 @@ export const TasksProvider = ({ children }) => {
 
         if (project) {
           const completedTasks = project.completedTasks + (completed ? 1 : -1);
+        setProjects((prevProjects) =>
+          prevProjects.map((project) =>
+            project.id === projectId
+              ? { ...project, completedTasks }
+              : project
+          )
+        );
           await fetch(`${API_BASE_URL}/projects/${projectId}`, {
             method: 'PATCH',
             headers: {
@@ -154,7 +161,6 @@ export const TasksProvider = ({ children }) => {
             .then((data) => console.log(data))
             .catch((error) => console.error(error));
           
-            window.location.reload();
         }
       } else {
         console.error('Failed to mark task as complete:', response.statusText);
