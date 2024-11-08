@@ -1,5 +1,5 @@
 # Frontend React (vite)
 
-''' yarn install '''
-''' yarn dev '''
+``` yarn install ```
+``` yarn dev ```
 
