@@ -1,8 +1,42 @@
-# React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# React Vite App
 
-Currently, two official plugins are available:
+Это приложение React на базе Vite для быстрой и эффективной разработки.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Начало работы
+
+Выполните следующие шаги, чтобы настроить и запустить приложение на вашей локальной машине.
+
+## Необходимые условия
+
+Node.js: Убедитесь, что Node.js установлен. Вы можете загрузить его с официального сайта Node.js.
+
+Yarn: Это приложение использует Yarn в качестве менеджера пакетов. Установите его глобально, если он еще не установлен:
+
+``` npm install -g yarn```
+
+## Установка
+
+1\. Клонируйте репозиторий на вашу локальную машину:
+
+``` git clone https://github.com/gogo45ish/project1.git ```
+#
+
+``` cd project1 ```
+
+2\. Установите зависимости:
+
+```yarn install``` 
+
+Запуск приложения
+
+Запустите сервер разработки:
+
+```yarn dev```
+
+Сборка для производства
+
+Чтобы создать оптимизированную сборку для производства:
+
+```yarn build ```
+
