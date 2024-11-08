@@ -1,13 +1,13 @@
 
-#React Vite App
+# React Vite App
 
 This is a React app powered by Vite for fast and efficient development.
 
-##Getting Started
+## Getting Started
 
 Follow the steps below to set up and run the app on your local machine.
 
-##Prerequisites
+## Prerequisites
 
 Node.js: Make sure Node.js is installed. You can download it from Node.js official website.
 
@@ -15,7 +15,7 @@ Yarn: This app uses Yarn as the package manager. Install it globally if not alre
 
 ```npm install -g yarn```
 
-##Installation
+## Installation
 
 1\. Clone the repository to your local machine:
 
