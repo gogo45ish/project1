@@ -17,6 +17,9 @@ export const TasksProvider = ({ children }) => {
   const [tasks, setTasks] = useState([]);
   const { projects  } = useProjects();
 
+  // Generates a random id
+  const generateId = () => (Math.floor(Math.random() * 100000000) + 1).toString();
+
   // Fetch all tasks
   const fetchTasks = async (projectId) => {
     try {
@@ -37,7 +40,7 @@ export const TasksProvider = ({ children }) => {
       createdAt: new Date().toISOString(),
       projectId: task.projectId,
       completed: task.completed,
-      id: uuidv4() // Convert id to integer
+      id: generateId(),
     };
     try {
       const response = await fetch(`${API_BASE_URL}/tasks`, {
@@ -57,8 +60,11 @@ export const TasksProvider = ({ children }) => {
   // Delete a task
   const deleteTask = async (taskId) => {
     try {
-      const taskToDelete = tasks.find((task) => task.id === taskId);
-      await fetch(`${API_BASE_URL}/tasks/${taskId}`, {
+      const taskToDelete = tasks.find((task) => task.id == taskId);
+      console.log(typeof taskId);
+      
+      const id = taskId.toString();
+      await fetch(`${API_BASE_URL}/tasks/${id}`, {
         method: 'DELETE',
       });
       
@@ -89,16 +95,41 @@ export const TasksProvider = ({ children }) => {
   };
 
   // Update a task
-  const updateTask = async (taskId, updatedFields) => {
+  const updateTaskName = async (taskId, name) => {
     try {
       const response = await fetch(`${API_BASE_URL}/tasks/${taskId}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(updatedFields),
+        body: JSON.stringify(name),
       });
-  
+
+      if (response.ok) {
+        const updatedTask = await response.json();
+        setTasks((prevTasks) =>
+          prevTasks.map((task) =>
+            task.id === taskId ? updatedTask : task
+          )
+        );
+      } else {
+        console.error('Failed to update task name:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Error updating task name:', error);
+    }
+  };
+
+  const markTaskComplete = async (taskId, completed) => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/tasks/${taskId}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ completed }),
+      });
+
       if (response.ok) {
         const updatedTask = await response.json();
         setTasks((prevTasks) =>
@@ -109,9 +140,9 @@ export const TasksProvider = ({ children }) => {
         const projectId = updatedTask.projectId;
         const project = projects.find((project) => project.id == projectId);
         console.log(project);
-        
+
         if (project) {
-          const completedTasks = project.completedTasks + (updatedTask.completed ? 1 : -1);
+          const completedTasks = project.completedTasks + (completed ? 1 : -1);
           await fetch(`${API_BASE_URL}/projects/${projectId}`, {
             method: 'PATCH',
             headers: {
@@ -126,10 +157,10 @@ export const TasksProvider = ({ children }) => {
             window.location.reload();
         }
       } else {
-        console.error('Failed to update task:', response.statusText);
+        console.error('Failed to mark task as complete:', response.statusText);
       }
     } catch (error) {
-      console.error('Error updating task:', error);
+      console.error('Error marking task as complete:', error);
     }
   };
 
@@ -137,7 +168,7 @@ export const TasksProvider = ({ children }) => {
   
 
   return (
-    <TasksContext.Provider value={{ tasks, addTask, deleteTask, updateTask, fetchTasks }}>
+    <TasksContext.Provider value={{ tasks, addTask, deleteTask, updateTaskName,markTaskComplete, fetchTasks }}>
       {children}
     </TasksContext.Provider>
   );

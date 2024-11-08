@@ -20,7 +20,7 @@ const TaskList = () => {
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
 
-  const { tasks, fetchTasks, addTask, deleteTask, updateTask } = useTasks();
+  const { tasks, fetchTasks, addTask, deleteTask, updateTaskName, markTaskComplete} = useTasks();
   const { projects } = useProjects();
 
   const projectTasks = tasks.filter((task) => task.projectId === id);
@@ -37,7 +37,7 @@ const TaskList = () => {
 
   const handleDeleteTask = (taskId) => deleteTask(taskId);
 
-  const handleMarkTaskComplete = (taskId, completed) => updateTask(taskId, { completed: !completed });
+  const handleMarkTaskComplete = (taskId, completed) => markTaskComplete(taskId, !completed);
 
   const handleEditTask = (taskId, currentName) => {
     setEditingTaskId(taskId);
@@ -45,7 +45,7 @@ const TaskList = () => {
   };
 
   const handleSaveTaskEdit = (taskId) => {
-    updateTask(taskId, { name: editedTaskName });
+    updateTaskName(taskId, { name: editedTaskName });
     setEditingTaskId(null);
     setEditedTaskName('');
   };

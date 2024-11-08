@@ -10,7 +10,6 @@ if (import.meta.env.MODE === 'development') {
 } else {
   API_BASE_URL = import.meta.env.VITE_API_BASE_URL
 }
-console.log('API Base URL:', API_BASE_URL); // Выводит разные значения в зависимости от среды
 
 console.log(import.meta.env);
 

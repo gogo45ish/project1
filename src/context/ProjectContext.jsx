@@ -17,6 +17,7 @@ export const ProjectsProvider = ({ children }) => {
   const [tasks, setTasks] = useState([]); // State to hold tasks
   const [completedTasks, setCompletedTasks] = useState(0)
   const { user } = useUser();
+  const generateId = () => (Math.floor(Math.random() * 100000000) + 1).toString();
 
   useEffect(() => {
     const fetchProjects = async () => {
@@ -51,7 +52,7 @@ export const ProjectsProvider = ({ children }) => {
         createdAt: new Date().toISOString(),
         userId: user.id,
         completedTasks: 0,
-        id: uuidv4()// Convert id to integer
+        id: generateId(),
       };
 
       const response = await fetch(`${API_BASE_URL}/projects`, {
